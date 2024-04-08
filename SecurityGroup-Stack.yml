@@ -1,0 +1,36 @@
+Parameters:
+  MyVPCID: 
+    Type: AWS::EC2::VPC::Id
+    Description: To launch the security group in the respective VPC.
+
+
+
+
+Resources:
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      Group Description: Security Group for EC2 instnace.
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+        
+        - IpProtocol: tcp
+          FromPort: '443'
+          ToPort: '443'
+          CidrIp: 0.0.0.0/0
+
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+  
+  VpcId: !Ref MyVPCID
+
+Outputs:
+  SGOutput:
+    Description: Outputs of a SG.
+    Value: !Ref MySecurityGroup
+        
